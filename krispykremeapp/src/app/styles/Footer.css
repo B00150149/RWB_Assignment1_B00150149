@@ -1,0 +1,50 @@
+/* Footer styles */
+footer {
+    border-top: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    background-color: #A1D88C;
+  }
+  
+  /* Logo container in footer */
+  footer div:first-child {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Navigation links container (Privacy Policy and Terms & Conditions) */
+  footer div:nth-child(2) {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Social media icons container */
+  footer div:nth-child(3) {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end; /* Align icons to the right */
+    gap: 20px;
+    padding-right: 20px; /* Add some space to the right */
+  }
+  
+  /* Individual links in the footer */
+  footer a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  /* Hover effect on links */
+  footer a:hover {
+    color: #007bff;
+  }
+  
+  /* Social media icons size */
+  footer a img {
+    width: 24px;
+    height: 24px;
+  }
+  
