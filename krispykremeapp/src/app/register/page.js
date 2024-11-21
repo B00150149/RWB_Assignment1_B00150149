@@ -5,14 +5,20 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+
 export default function Home() {
-	
+	const [userType, setUserType] = React.useState('Customer');
+
 				const handleSubmit = (event) => {
 				console.log("handling submit");
 				event.preventDefault();
@@ -28,11 +34,11 @@ export default function Home() {
 				console.log("Sent address:" + address)
 				console.log("Sent telephone:" + num)
 
-				runDBCallAsync(`http://localhost:3000/api/login?username=${email}&pass=${pass}&num=${num}&address=${address}`)
+				runDBCallAsync(`http://localhost:3000/api/register?email=${email}&pass=${pass}&num=${num}&address=${address}&type=${userType}`)
 				}; // end handle submit
 
 
-							
+								
 				async function runDBCallAsync(url) {
 				const res = await fetch(url);
 				const data = await res.json();
@@ -42,15 +48,17 @@ export default function Home() {
 				} else {
 				console.log("not valid ")
 				}
+
+				
+				  
 				}
 
 return (
-	<div className="newlisting">
-      <Header />
-	  
-		<Container maxWidth="sm">
-		<Box sx={{ height: '100vh' }} >
-		<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+<div className="login">
+<Header />
+	<Container maxWidth="sm">
+	<Box sx={{ height: '100vh' }} >
+	<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
 		<TextField
 		margin="normal"
@@ -96,23 +104,30 @@ return (
 		autoComplete="current-password"
 		/>
 
+		<FormControl fullWidth sx={{ mt: 2, mb: 2 }}>
+            <InputLabel id="user-type-label">User Type</InputLabel>
+            <Select
+            labelId="user-type-label"
+            id="user-type"
+            value={userType}
+            onChange={(e) => setUserType(e.target.value)}
+            label="User Type">
+            <MenuItem value="Customer">Customer</MenuItem>
+            <MenuItem value="Manager">Manager</MenuItem>
+            </Select>
+         </FormControl>
+
 
 		<FormControlLabel
 		control={<Checkbox value="remember" color="primary" />}
 		label="Remember me"
 		/>
-		<Button
-		type="submit"
-		fullWidth
-		variant="contained"
-		sx={{ mt: 3, mb: 2 }}
-		>
-		Sign In
-		</Button>
-		</Box>
-		</Box>
-		</Container>
-	<Footer />
-	</div> 	
+		<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}> Register </Button>
+
+	</Box>
+	</Box>
+	</Container>
+<Footer />
+</div> 	
 ); // end return
 }

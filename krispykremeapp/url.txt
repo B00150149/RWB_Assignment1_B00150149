@@ -1,0 +1,4 @@
+mongodb+srv://root:myPassword123@krispykremecluster.2a1di.mongodb.net/?retryWrites=true&w=majority&appName=KrispyKremeCluster
+
+
+root Password123

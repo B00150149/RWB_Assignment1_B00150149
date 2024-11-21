@@ -17,7 +17,7 @@ export default function Header(){
         <Link href="/cart">
         <Image src={cart} alt="Logo" width={24} height={24} />
         </Link>
-        <Link href="/newregister">Signup</Link>
+        <Link href="/login">Login</Link>
       </nav>
 
     </header>
