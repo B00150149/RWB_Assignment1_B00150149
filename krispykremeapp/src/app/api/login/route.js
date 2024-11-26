@@ -30,14 +30,17 @@ export async function GET(req, res) {
     if(findResult.length >0 ){
     valid = true;
     console.log("login valid")
+    
     } else {
     valid = false;
-    console.log("login invalid")
+   
     }
+
+    return Response.json({ "status":valid })
     //==========================================================
 
 
     // at the end of the process we need to send something back.
-    return Response.json({ "data":"valid" })
+   
     }
     

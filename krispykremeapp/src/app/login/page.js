@@ -33,9 +33,11 @@ export default function Login() {
 			async function runDBCallAsync(url) {
 				const res = await fetch(url);
 				const data = await res.json();
+
+				console.log("resp from server")
 				console.log(data);
 
-				if(data.valid == true){
+				if(data.status == true){
 				console.log("login is valid!")
 				window.location="/"
 				} else {
