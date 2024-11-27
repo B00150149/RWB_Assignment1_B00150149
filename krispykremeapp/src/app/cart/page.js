@@ -26,6 +26,9 @@ export default function Cart() {
             .catch((error) => console.error('Error fetching cart items:', error));
     }, []);
 
+
+
+
     const theme = createTheme({
         palette: {
             primary: { main: green[500] },
