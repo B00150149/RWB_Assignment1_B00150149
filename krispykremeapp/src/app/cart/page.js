@@ -80,11 +80,7 @@ export default function Cart() {
                                 <Typography variant="h6" sx={{ textAlign: 'right' }}>
                                     Total: ${(Number(total) || 0).toFixed(2)}
                                 </Typography>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    sx={{ display: 'block', mx: 'auto', mt: 2 }}
-                                >
+                                <Button  variant="contained" color="primary" sx={{ display: 'block', mx: 'auto', mt: 2 }} >
                                     Checkout
                                 </Button>
                             </Box>
