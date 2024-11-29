@@ -1,4 +1,6 @@
 
+import { getCustomSession } from '../sessionCode.js';
+
 // // //*********************************** KYLE FIXED CODE *****************************************8
 export async function GET(req, res) {
     // Make a note we are on
@@ -27,6 +29,16 @@ export async function GET(req, res) {
     const findResult = await collection.find({ email: email, pass: pass }).toArray();
 
     console.log('Found documents =>', findResult);
+
+
+let session = await getCustomSession()
+
+session.email = email;
+session.save()
+
+console.log(session.email)
+
+
     let valid = false
 
     if(findResult.length >0 ){
