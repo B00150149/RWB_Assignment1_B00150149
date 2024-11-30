@@ -10,6 +10,6 @@ export async function GET(req, res) {
   let email = session.email;
   console.log(email);
 
-  return Response.json({});
+  return Response.json({"email": email,"role":customersRole});
 
 }

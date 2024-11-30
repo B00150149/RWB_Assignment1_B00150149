@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -18,23 +19,32 @@ export default function Login() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const pass = data.get('pass');
-
+    
     console.log('Sent email:', email);
     console.log('Sent pass:', pass);
 
-    runDBCallAsync(`http://localhost:3000/api/login?email=${email}&pass=${pass}`);
+    runDBCallAsync(`/api/login?email=${email}&pass=${pass}`);
   };
 
   async function runDBCallAsync(url) {
     const res = await fetch(url);
     const data = await res.json();
 
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const email = urlParams.get('email'); // Get the email from the URL
+
     console.log('Response from server:', data);
 
     if (data.status === true) {
       console.log('Login is valid!');
+      console.log('Role is', data.role);
       localStorage.setItem('isLoggedIn', 'true'); // Mark user as logged in
+      if(data.role == "Manager"){
+        window.location = '/dashboard';
+      }
+      else{
       window.location = '/'; // Redirect to the home page
+      }
     } else {
       console.log('Invalid login');
       alert('Invalid email or password');
@@ -45,7 +55,7 @@ export default function Login() {
     <div className="login">
       <Header />
       <Container maxWidth="sm">
-        <Box sx={{ height: '100vh' }}>
+        {/* <Box sx={{ height: '100vh' }}> */}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -77,8 +87,15 @@ export default function Login() {
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Login
             </Button>
+
+            <p>
+      Don't have an account?{' '}
+      <Link href="/register" style={{ color: 'blue', textDecoration: 'underline' }}>
+        Register
+      </Link>
+    </p>
           </Box>
-        </Box>
+        {/* </Box> */}
       </Container>
       <Footer />
     </div>
@@ -87,107 +104,3 @@ export default function Login() {
 
 
 
-
-
-//*******************************CORRECT CODE ***********************8 */
-// 'use client';
-// import * as React from 'react';
-// import Avatar from '@mui/material/Avatar';
-// import Button from '@mui/material/Button';
-// import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
-// import Link from '@mui/material/Link';
-// import Container from '@mui/material/Container';
-// import Box from '@mui/material/Box';
-// import Header from '../components/Header';
-// import Footer from '../components/Footer';
-
-// export default function Login() {
-	
-// 			const handleSubmit = (event) => {
-// 				console.log("handling submit");
-// 				event.preventDefault();
-
-// 				const data = new FormData(event.currentTarget);
-// 				let email = data.get('email')
-// 				let pass = data.get('pass')
-				
-// 				console.log("Sent email:" + email)
-// 				console.log("Sent pass:" + pass)
-
-// 				runDBCallAsync(`http://localhost:3000/api/login?email=${email}&pass=${pass}`)
-
-// 			}; // end handle submit
-
-
-							
-// 			async function runDBCallAsync(url) {
-// 				const res = await fetch(url);
-// 				const data = await res.json();
-
-// 				console.log("resp from server")
-// 				console.log(data);
-
-// 				if(data.status == true){
-// 				console.log("login is valid!")
-// 				localStorage.setItem('isLoggedIn', 'true'); // Mark user as logged in
-// 				window.location="/"
-// 				} else {
-// 				console.log("not valid ")
-// 				alert('Invalid email or password');
-// 				}
-// 			}
-
-// 		return (
-// 			<div className="login">
-// 			<Header />
-	  
-// 				<Container maxWidth="sm">
-// 				<Box sx={{ height: '100vh' }} >
-// 				<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-
-// 					<TextField
-// 					margin="normal"
-// 					required
-// 					fullWidth
-// 					id="email"
-// 					label="Email Address"
-// 					name="email"
-// 					autoComplete="email"
-// 					autoFocus
-// 					/>
-
-// 					<TextField
-// 					margin="normal"
-// 					required
-// 					fullWidth
-// 					name="pass"
-// 					label="Pass"
-// 					type="pass"
-// 					id="pass"
-// 					autoComplete="current-password"
-// 					/>
-
-
-// 					<FormControlLabel
-// 					control={<Checkbox value="remember" color="primary" />}
-// 					label="Remember me"
-// 					/>
-					
-// 					<Button
-// 					type="submit"
-// 					fullWidth
-// 					variant="contained"
-// 					sx={{ mt: 3, mb: 2 }}
-// 					>
-// 					Login
-// 					</Button>
-
-// 				</Box>
-// 				</Box>
-// 				</Container>
-// 			<Footer />
-// 			</div> 	
-// 		); // end return
-// }//end of login function

@@ -34,7 +34,7 @@ export default function Home() {
 				console.log("Sent address:" + address)
 				console.log("Sent telephone:" + num)
 
-				runDBCallAsync(`http://localhost:3000/api/register?email=${email}&pass=${pass}&num=${num}&address=${address}&type=${userType}`)
+				runDBCallAsync(`/api/register?email=${email}&pass=${pass}&num=${num}&address=${address}&type=${userType}`)
 				}; // end handle submit
 
 
@@ -125,6 +125,12 @@ return (
 		<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}> Register </Button>
 
 	</Box>
+	<p>
+      Already have an account?{' '}
+      <Link href="/login" style={{ color: 'blue', textDecoration: 'underline' }}>
+        Login
+      </Link>
+    </p>
 	</Box>
 	</Container>
 <Footer />

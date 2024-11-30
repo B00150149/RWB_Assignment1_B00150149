@@ -51,9 +51,7 @@ export default function Header() {
      .then((data) => {  
        console.log(data.message); // 'Logged out successfully'
      });
-     fetch(`/api/emptyCart`);
-     
-     window.location.reload(); // Optionally reload the page
+     window.location = '/login'; // Optionally reload the page
   }
 
 
@@ -75,15 +73,11 @@ export default function Header() {
     
 
       <nav style={{ display: 'flex', gap: '20px' }}>
-        <Link href="/">Home</Link>
-        <Link href="/menu">Menu</Link>
-        <Link href="/cart">
-          <Image src={cart} alt="Cart" width={24} height={24} />
-        </Link>
+        <Link href="/dashboard">Dashboard</Link>
 
         {isLoggedIn ? (
           <button
-            onClick={handleLogout}
+          onClick={handleLogout}
             style={{
               background: 'none',
               border: 'none',

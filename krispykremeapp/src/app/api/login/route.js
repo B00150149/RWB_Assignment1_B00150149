@@ -17,7 +17,9 @@ export async function GET(req, res) {
     // database call goes here
     // =================================================
     const { MongoClient } = require('mongodb');
-    const url = 'mongodb+srv://root:myPassword123@krispykremecluster.2a1di.mongodb.net/?retryWrites=true&w=majority&appName=KrispyKremeCluster'
+    //const url = 'mongodb+srv://root:myPassword123@krispykremecluster.2a1di.mongodb.net/?retryWrites=true&w=majority&appName=KrispyKremeCluster'
+    const url = process.env.DB_ADDRESS
+    
     const client = new MongoClient(url);
     const dbName = 'app'; // database name
 
@@ -30,20 +32,31 @@ export async function GET(req, res) {
 
     console.log('Found documents =>', findResult);
 
+    // //Sessions start
+    // let session = await getCustomSession()
+    // session.role = 'customer';
+    // session.email = email;
+    // await session.save();
 
-let session = await getCustomSession()
-
-session.email = email;
-session.save()
-
-console.log(session.email)
-
+    // console.log(session.email)
+    //end session
 
     let valid = false
+    let role = "";
 
     if(findResult.length >0 ){
-    valid = true;
-    console.log("login valid");
+    
+        role = findResult[0].type;
+        //Sessions start
+        let session = await getCustomSession()
+        session.role = findResult[0].type;//'customer';
+        session.email = email;
+        await session.save();
+
+        console.log(session.email);
+        console.log(findResult[0].type);
+        valid = true;
+        console.log("login valid");
     
     } else {
     valid = false;
@@ -51,7 +64,7 @@ console.log(session.email)
    
     }
 
-    return Response.json({ "status":valid })
+    return Response.json({ "status":valid,"role":role })
     //==========================================================
 
 

@@ -17,28 +17,24 @@ export default function Home() {
 
     // Fetch products from the API
     useEffect(() => {
-        fetch('http://localhost:3000/api/getProducts')
+        fetch('/api/getProducts')
             .then((res) => res.json())
             .then((data) => {
                 setData(data);
             });
     }, []);
 
-    // function putInCart(pname) {
-    //   console.log("putting in cart: " + pname );
-    //  fetch("http://localhost:3000/api/putInCart?pname=" + pname);
-    //   }
 
     function putInCart(pname, pdesc, price, image) {
       console.log("putting in cart:", { pname, pdesc, price, image });
     
-      fetch(`http://localhost:3000/api/putInCart?pname=${encodeURIComponent(pname)}&pdesc=${encodeURIComponent(pdesc)}&price=${encodeURIComponent(price)}&image=${encodeURIComponent(image)}`);
+      fetch(`/api/putInCart?pname=${encodeURIComponent(pname)}&pdesc=${encodeURIComponent(pdesc)}&price=${encodeURIComponent(price)}&image=${encodeURIComponent(image)}`);
     }
     
 
     // Fetch weather data
     useEffect(() => {
-        fetch('http://localhost:3000/api/getWeather')
+        fetch('/api/getWeather')
             .then((res) => res.json())
             .then((weather) => {
                 setWeatherData(weather);

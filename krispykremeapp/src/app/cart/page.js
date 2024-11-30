@@ -12,9 +12,30 @@ export default function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
 
+    const [userData, setUserData] = useState(null);
+
+    // http://localhost:3000
+
+  useEffect(() => {
+    // Fetch the session email
+    const fetchUserData = async () => {
+      const response = await fetch('/api/getData');
+            const data = await response.json();
+
+            if (data.email/* && data.role*/) {
+                setUserData(data);
+                console.log('get Data call successful');
+            } else {
+                //console.error('No user data found');
+            }
+    };
+
+    fetchUserData();
+  }, []);
+
     // Fetch cart items from the API
     useEffect(() => {
-        fetch('http://localhost:3000/api/getCartItems')
+        fetch('/api/getCartItems')
             .then((res) => res.json())
             .then((data) => {
                 setCartItems(data);
@@ -27,6 +48,17 @@ export default function Cart() {
     }, []);
 
 
+    function putOrders(email) {
+        console.log("putting in order:", { email});
+        fetch(`/api/putOrders?email=${encodeURIComponent(email)}`);
+        // //empty cart after order placed
+        // fetch(`http://localhost:3000/api/emptyCart`);
+
+        // // After checkout, trigger a UI refresh by fetching the updated cart items
+         setCartItems([]); // Clear the current cart items from state
+         setTotal(0); // Reset the total
+      }
+      
 
 
     const theme = createTheme({
@@ -80,7 +112,15 @@ export default function Cart() {
                                 <Typography variant="h6" sx={{ textAlign: 'right' }}>
                                     Total: ${(Number(total) || 0).toFixed(2)}
                                 </Typography>
-                                <Button  variant="contained" color="primary" sx={{ display: 'block', mx: 'auto', mt: 2 }} >
+                                <Button 
+                                onClick={() => {
+                                    if (userData && userData.email) {
+                                      putOrders(userData.email);
+                                    } else {
+                                      alert("Please login to place order");
+                                    }
+                                  }}
+                                variant="contained" color="primary" sx={{ display: 'block', mx: 'auto', mt: 2 }} >
                                     Checkout
                                 </Button>
                             </Box>

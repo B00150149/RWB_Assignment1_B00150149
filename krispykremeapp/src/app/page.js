@@ -63,7 +63,7 @@ export default function Home() {
         <Grid container spacing={4} justifyContent="center">
           {[
             { src: "/images/Kinder.jpg", title: "Kinder Donut", desc: "Classic Kinder!" },
-            { src: "/images/lime.jpg", title: "Lime Pie Donut", desc: "Sweet&Saur delight!" },
+            { src: "/images/lime.jpg", title: "Lime Pie Donut", desc: "Lemon delight!" },
             { src: "/images/oreo.jpg", title: "Oreo Donut", desc: "Orea and chocolate!" },
           ].map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
