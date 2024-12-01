@@ -11,8 +11,8 @@ export async function GET(req, res) {
     // Fetch data from the first API
     //const cartItemsResponse = await fetch('http://localhost:3000/api/getCartItems');
     
-    const cartItemsResponse = await fetch('${process.env.BASE_URL}/api/getCartItems');  
-    const cartItems = await cartItemsResponse.json();
+    //const cartItemsResponse = await fetch('${process.env.BASE_URL}/api/getCartItems');  
+    //const cartItems = await cartItemsResponse.json();
     
     
    console.log('Received parameters:', { email});
@@ -32,6 +32,10 @@ export async function GET(req, res) {
        await client.connect();
        console.log('Connected successfully to server');
        const db = client.db(dbName);
+       //get data from shopping cart
+       const collectioncart = db.collection('shopping_cart'); // collection name
+       const cartItems = await collectioncart.find({}).toArray();
+
        const collection = db.collection('orders');
 
        // Calculate the total price by summing the prices of all items
