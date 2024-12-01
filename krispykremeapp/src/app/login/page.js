@@ -41,11 +41,9 @@ export default function Login() {
       localStorage.setItem('isLoggedIn', 'true'); // Mark user as logged in
       if(data.role == "Manager"){
         window.location = '/dashboard';
-        //router.push('/dashboard'); // Redirect to the Manager dashboard
       }
       else{
       window.location = '/'; // Redirect to the home page
-      //router.push('/dashboard'); // Redirect to the Manager dashboard
       }
     } else {
       console.log('Invalid login');
