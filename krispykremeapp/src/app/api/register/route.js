@@ -25,12 +25,10 @@ export async function GET(req, res) {
   
     // =================================================
     const { MongoClient } = require('mongodb');
-    // const url ='mongodb+srv://root:myPassword123@krispykremecluster.2a1di.mongodb.net/?retryWrites=true&w=majority&appName=KrispyKremeCluster';
     const url = process.env.DB_ADDRESS
     const client = new MongoClient(url);
     const dbName = 'app';
   
-    try {
       // Connect to MongoDB
       await client.connect();
       console.log("Connected successfully to MongoDB Atlas");
@@ -46,15 +44,7 @@ export async function GET(req, res) {
   
       // Return success response
       return new Response(JSON.stringify({ data: "inserted" }), { status: 200 });
-    } catch (error) {
-      console.error("Error occurred during registration:", error);
-      return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
-    } finally {
-        
-      // Ensure MongoDB client is closed
-      await client.close();
-      console.log("MongoDB client closed");
-    }
+   
   }
   
 

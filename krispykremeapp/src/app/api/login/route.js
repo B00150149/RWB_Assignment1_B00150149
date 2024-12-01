@@ -17,7 +17,6 @@ export async function GET(req, res) {
     // database call goes here
     // =================================================
     const { MongoClient } = require('mongodb');
-    //const url = 'mongodb+srv://root:myPassword123@krispykremecluster.2a1di.mongodb.net/?retryWrites=true&w=majority&appName=KrispyKremeCluster'
     const url = process.env.DB_ADDRESS
     
     const client = new MongoClient(url);
@@ -31,15 +30,6 @@ export async function GET(req, res) {
     const findResult = await collection.find({ email: email, pass: pass }).toArray();
 
     console.log('Found documents =>', findResult);
-
-    // //Sessions start
-    // let session = await getCustomSession()
-    // session.role = 'customer';
-    // session.email = email;
-    // await session.save();
-
-    // console.log(session.email)
-    //end session
 
     let valid = false
     let role = "";
@@ -64,12 +54,8 @@ export async function GET(req, res) {
    
     }
 
-    return Response.json({ "status":valid,"role":role })
-    //==========================================================
-
-
     // at the end of the process we need to send something back.
-   
+    return Response.json({ "status":valid,"role":role })
     }
     
 
@@ -81,74 +67,6 @@ export async function GET(req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // //*********************************** SESSIONS CODE *****************************************8
-// import { getCustomSession } from '../sessionCode.js';
-// import { MongoClient } from 'mongodb';
-
-// export async function GET(req, res) {
-//     // Log entry point
-//     console.log("In the login API page");
-
-//     // Parse query parameters
-//     const { searchParams } = new URL(req.url);
-//     const email = searchParams.get('email');
-//     const pass = searchParams.get('pass');
-//     console.log(email, pass);
-
-//     // Database call to validate user
-//     const url = 'mongodb+srv://root:myPassword123@krispykremecluster.2a1di.mongodb.net/?retryWrites=true&w=majority&appName=KrispyKremeCluster';
-//     const client = new MongoClient(url);
-//     const dbName = 'app';
-
-//     await client.connect();
-//     console.log('Connected successfully to server');
-//     const db = client.db(dbName);
-//     const collection = db.collection('users');
-
-//     const findResult = await collection.find({ email: email, pass: pass }).toArray();
-//     console.log('Found documents =>', findResult);
-
-//     // Determine validity of login
-//     let valid = false;
-//     if (findResult.length > 0) {
-//         valid = true;
-//         console.log("Login valid");
-
-//         // Handle session creation
-//         let session = await getCustomSession();
-//         session.email = email; // Store the email in the session
-//         session.role = findResult[0].role || 'customer'; // Store the role if available
-//         await session.save(); // Save the session
-//         console.log("Session saved");
-//     } else {
-//         valid = false;
-//         console.log("Invalid login");
-//     }
-
-//     // Return response with login status
-//     return Response.json({ status: valid });
-// }
 
 
 

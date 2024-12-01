@@ -20,23 +20,3 @@ export async function GET(req, res) {
     return Response.json(findResult)
     }
     
-
-
-
-// export async function GET(req, res) {
-//     const { MongoClient } = require('mongodb');
-
-//     const url = 'mongodb+srv://root:myPassword123@krispykremecluster.2a1di.mongodb.net/?retryWrites=true&w=majority&appName=KrispyKremeCluster';
-//     const client = new MongoClient(url);
-//     const dbName = 'app';
-
-//     await client.connect();
-//     console.log('Connected successfully to server');
-//     const db = client.db(dbName);
-//     const collection = db.collection('shopping_cart');
-
-//     // Fetch all items from the shopping cart
-//     const cartItems = await collection.find({ username: "sample@test.com" }).toArray();
-
-//     return Response.json(cartItems); // Return all cart items
-// }

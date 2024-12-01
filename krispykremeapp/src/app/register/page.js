@@ -43,7 +43,7 @@ export default function Home() {
 				const res = await fetch(url);
 				const data = await res.json();
 
-				if(data.data== "valid"){
+				if(data.data === "inserted"){
 				console.log("register is succesfull!")
 				window.location = '/login';
 				} else {
@@ -93,7 +93,7 @@ return (
 		id="address"
 		autoComplete="address"
 		/>
-{/* 
+
 		<TextField
 		margin="normal"
 		required
@@ -103,18 +103,8 @@ return (
 		type="pass"
 		id="pass"
 		autoComplete="current-password"
-		/> */}
+		/>
 
-<TextField
-              margin="normal"
-              required
-              fullWidth
-              name="pass"
-              label="Password"
-              type="password"
-              id="pass"
-              autoComplete="current-password"
-            />
 
 
 		<FormControl fullWidth sx={{ mt: 2, mb: 2 }}>
@@ -131,10 +121,6 @@ return (
          </FormControl>
 
 
-		{/* <FormControlLabel
-		control={<Checkbox value="remember" color="primary" />}
-		label="Remember me"
-		/> */}
 		<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}> Register </Button>
 
 	</Box>
