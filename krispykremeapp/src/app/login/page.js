@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useRouter } from 'next/router';
 
 export default function Login() {
   const handleSubmit = (event) => {
@@ -40,10 +41,12 @@ export default function Login() {
       console.log('Role is', data.role);
       localStorage.setItem('isLoggedIn', 'true'); // Mark user as logged in
       if(data.role == "Manager"){
-        window.location = '/dashboard';
+        //window.location = '/dashboard';
+        router.push('/dashboard'); // Redirect to the Manager dashboard
       }
       else{
-      window.location = '/'; // Redirect to the home page
+      //window.location = '/'; // Redirect to the home page
+      router.push('/dashboard'); // Redirect to the Manager dashboard
       }
     } else {
       console.log('Invalid login');
