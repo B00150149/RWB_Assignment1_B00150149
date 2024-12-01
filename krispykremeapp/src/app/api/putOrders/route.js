@@ -10,9 +10,8 @@ export async function GET(req, res) {
    
     // Fetch data from the first API
     //const cartItemsResponse = await fetch('http://localhost:3000/api/getCartItems');
-    const cartItemsResponse = await fetch('https://rwb-assignment1-b00150149-axl6u4pdi-tests-projects-a296a9af.vercel.app/api/getCartItems');
-
-  
+    
+    const cartItemsResponse = await fetch('https://rwb-assignment1-b00150149-axl6u4pdi-tests-projects-a296a9af.vercel.app/api/getCartItems');  
     const cartItems = await cartItemsResponse.json();
     
     
