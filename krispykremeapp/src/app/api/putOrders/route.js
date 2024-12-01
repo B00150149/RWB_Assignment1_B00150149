@@ -9,7 +9,7 @@ export async function GET(req, res) {
    const email = searchParams.get('email') ;
    
     // Fetch data from the first API
-    const cartItemsResponse = await fetch('http://localhost:3000/api/getCartItems');
+    const cartItemsResponse = await fetch('/api/getCartItems');
     const cartItems = await cartItemsResponse.json();
     
     

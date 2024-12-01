@@ -44,7 +44,8 @@ export default function Home() {
 				const data = await res.json();
 
 				if(data.data== "valid"){
-				console.log("login is valid!")
+				console.log("register is succesfull!")
+				window.location = '/login';
 				} else {
 				console.log("not valid ")
 				}
@@ -92,7 +93,7 @@ return (
 		id="address"
 		autoComplete="address"
 		/>
-
+{/* 
 		<TextField
 		margin="normal"
 		required
@@ -102,7 +103,19 @@ return (
 		type="pass"
 		id="pass"
 		autoComplete="current-password"
-		/>
+		/> */}
+
+<TextField
+              margin="normal"
+              required
+              fullWidth
+              name="pass"
+              label="Password"
+              type="password"
+              id="pass"
+              autoComplete="current-password"
+            />
+
 
 		<FormControl fullWidth sx={{ mt: 2, mb: 2 }}>
             <InputLabel id="user-type-label">User Type</InputLabel>
@@ -118,10 +131,10 @@ return (
          </FormControl>
 
 
-		<FormControlLabel
+		{/* <FormControlLabel
 		control={<Checkbox value="remember" color="primary" />}
 		label="Remember me"
-		/>
+		/> */}
 		<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}> Register </Button>
 
 	</Box>
