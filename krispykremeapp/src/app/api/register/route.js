@@ -17,13 +17,19 @@ export async function GET(req, res) {
     console.log("Received phone number:", num);
     console.log("Received user type:", type);
 
+    //store a password as a hash in the database 
+    const bcrypt = require('bcrypt');
+    const saltRounds = 10;
+    const hash = bcrypt.hashSync(pass, saltRounds);
+
     // Validate input
-    if (!email || !pass || !address || !num || !type) {
-      console.log("Invalid input detected");
-      return new Response(JSON.stringify({ error: "All fields are required" }), { status: 400 });
-    }
-  
-    // =================================================
+if (!email || !pass || !address || !num || !type) {
+  console.log("Invalid input detected");
+  return new Response(JSON.stringify({ error: "All fields are required" }), { status: 400 });
+}
+
+
+     // =================================================
     const { MongoClient } = require('mongodb');
     const url = process.env.DB_ADDRESS
     const client = new MongoClient(url);
@@ -37,7 +43,7 @@ export async function GET(req, res) {
       const collection = db.collection('users');
   
       // Insert the user data
-      const user = { email, pass, address, num, type, createdAt: new Date() };
+      const user = { email, pass: hash, address, num, type, createdAt: new Date() };
       const insertResult = await collection.insertOne(user);
   
       console.log("Insert result:", insertResult);
@@ -47,4 +53,3 @@ export async function GET(req, res) {
    
   }
   
-
