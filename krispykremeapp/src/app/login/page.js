@@ -141,6 +141,15 @@ export default function Login() {
               type="password"
               id="pass"
               autoComplete="current-password"
+              inputProps={{
+                maxLength: 20,
+                pattern: "[A-Za-z0-9]*", // Allows only alphabets and numbers
+              }}
+              onInput={(e) =>
+                (e.target.value = e.target.value.replace(/[^A-Za-z0-9]/g, ""))
+              }   
+              
+            
             />
 
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>

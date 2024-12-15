@@ -149,8 +149,11 @@ export default function register() {
               type="text"
               id="num"
               autoComplete="tel"
-              //inputProps={{ maxLength: 15 }}
-            />
+              inputProps={{
+                inputMode: 'numeric', // Enforces numeric keyboard
+                pattern: "[0-9]*",    // Allows only digits
+              }}
+              onInput={(e) => (e.target.value = e.target.value.replace(/[^0-9]/g, ""))}            />
             <TextField
               margin="normal"
               required
@@ -160,8 +163,12 @@ export default function register() {
               type="address"
               id="address"
               autoComplete="address"
-              //inputProps={{ maxLength: 100 }}
-            />
+              inputProps={{
+                pattern: "[A-Za-z0-9 ]*", // Allows only alphabets, numbers, and spaces
+              }}
+              onInput={(e) =>
+                (e.target.value = e.target.value.replace(/[^A-Za-z0-9 ]/g, ""))
+              }            />
             <TextField
               margin="normal"
               required
@@ -171,7 +178,13 @@ export default function register() {
               type="password"
               id="pass"
               autoComplete="current-password"
-              //inputProps={{ maxLength: 20 }}
+              inputProps={{
+                maxLength: 20,
+                pattern: "[A-Za-z0-9]*", // Allows only alphabets and numbers
+              }}
+              onInput={(e) =>
+                (e.target.value = e.target.value.replace(/[^A-Za-z0-9]/g, ""))
+              }
             />
             <FormControl fullWidth sx={{ mt: 2, mb: 2 }}>
               <InputLabel id="user-type-label">User Type</InputLabel>
